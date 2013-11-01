@@ -1,0 +1,30 @@
+
+<!-- 
+  This is a file to be processed by Gwenhywfar's tool typemaker 
+  It creates the necessary files to implement the types listed herein.
+  I you make any changes to this file do a "make types" in this folder.
+-->
+
+<types>
+  <type id="LC_STARCOS_KEYDESCR" 
+        filename="starcos_keydescr"
+        prefix="LC_Starcos_KeyDescr" 
+        class="Starcos_KeyDescr"
+        access="public"
+        list="lib"
+        list2="lib" >
+    <headers>
+      <header type="sys" >chipcard/cards/starcos.h</header>
+      <header type="sys" >chipcard/chipcard.h</header>
+    </headers>
+    
+    <elem name="keyId" type="int" />
+    <elem name="status" type="int" />
+    <elem name="keyType" type="int" />
+    <elem name="keyNum" type="int" />
+    <elem name="keyVer" type="int" />
+  </type>
+  
+  
+  
+</types>

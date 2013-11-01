@@ -1,0 +1,54 @@
+
+This folder contains some tutorial files.
+
+1. tutorial1
+============
+This is a short introduction into the usage of Libchipcard2.
+It simply waits for a card and dumps some information about it.
+
+There are three versions of this tutorial with different levels of verbosity
+and error checking. You should study them one by one to understand how
+Libchipcard2 can be used.
+
+
+1.1. tutorial1a
+---------------
+This version has no documentation and does no error checking, just to let you
+have a look at the structure of a Libchipcard2 aware program.
+
+
+1.2. tutorial1b
+---------------
+This is a line-by-line documented version of tutorial1a.
+It is intended to make you understand what each line does.
+Still no error checking
+
+
+1.3. tutorial1c
+---------------
+This is a version with complete error checking.
+
+
+
+2. tutorial2
+============
+While tutorial1 only works with base classes we are now to understand how
+more complex card classes can be used.
+This tutorial waits for a German medical card to be inserted, reads the
+information stored on the card and prints it to the standard output channel.
+
+
+
+
+3. tutorial3
+============
+This tutorial demonstrates how to define your own card type. It therefore
+explains the heritage functions of the library Gwenhywfar.
+The implementation of the new card type "ExampleCard" can be found in the 
+files examplecard.{c,h,xml}.
+
+
+
+Martin Preuss, Hamburg/Germany, 2006/02/14
+
+

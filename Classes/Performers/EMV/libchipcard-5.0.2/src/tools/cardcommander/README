@@ -1,0 +1,11 @@
+This folder contains a very basic program that allows you to send raw
+APDUs to a chip card.
+
+It is only usefull for people trying to implement new card classes, like
+me ;-)
+
+It prooved at least to me to be very usefull even because of its simplicity.
+
+After starting the tool try "help". That will you show all commands
+available (which a very few for now ;-)
+

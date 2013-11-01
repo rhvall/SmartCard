@@ -1,0 +1,386 @@
+
+===========================================================================
+                 Libchipcard 4.2.4 (2009/01/22)
+===========================================================================
+
+This release fixes a few bugs and adds descriptions for some more readers.
+
+
+===========================================================================
+                 Libchipcard 4.2.0 (2008/08/19)
+===========================================================================
+
+This release reintroduces a CryptToken for STARCOS cards and improves 
+support for the upcoming "Elektronische Gesundheitskarte" which can now be
+read by the tool kvkread along with old "Krankenversichertenkarte" cards.
+Hardware scans can now be triggered by signals again (was broken in previous
+releases).
+
+
+===========================================================================
+                 Libchipcard 4.1.3 (2008/07/08)
+===========================================================================
+
+This release should support MacOSX out-of-the-box again.
+
+
+===========================================================================
+                 Libchipcard 4.1.2 (2008/07/01)
+===========================================================================
+
+This release offers a workaround for an overflow of the DDV card signature
+sequence counter (this case is not described in the HBCI specs).
+
+
+===========================================================================
+                 Libchipcard 4.1.1 (2008/06/11)
+===========================================================================
+
+This release fixes a bug in the CTAPI wrapper.
+
+
+===========================================================================
+                 Libchipcard 4.1.0 (2008/04/26)
+===========================================================================
+
+This release adds support for two more readers (O2 Micro 776 and 
+Cherry ST2000-U). Some bugs have been fixed and support for static linking
+has been improved.
+
+
+===========================================================================
+                 Libchipcard 4.0.0 (2007/11/22)
+===========================================================================
+
+Released as stable version 4.0.0.
+
+
+===========================================================================
+                 Libchipcard 3.9.13rc6 (2007/11/19)
+===========================================================================
+
+Added missing files for tool kvkcard.
+
+
+===========================================================================
+                 Libchipcard 3.9.12rc5 (2007/11/19)
+===========================================================================
+
+This release obsoletes the KVK service for German medical cards with the
+tool kvkread in daemon mode.
+
+
+===========================================================================
+                 Libchipcard 3.9.11rc4 (2007/11/17)
+===========================================================================
+
+This release simplifies WIN32 installations.
+
+
+===========================================================================
+                 Libchipcard 3.9.10rc3 (2007/11/16)
+===========================================================================
+
+This release fixes SSL secured connections and thus allows for remote
+card servers (e.g. slave mode on thin clients works again).
+
+
+===========================================================================
+                 Libchipcard 3.9.9rc2 (2007/11/11)
+===========================================================================
+
+This release just adds a search folder for the free CCID driver.
+
+
+===========================================================================
+                 Libchipcard 3.9.8rc1 (2007/11/10)
+===========================================================================
+
+This is a release candidate for the next stable release of Libchipcard4.
+It fixes a minor bug on WIN32 platforms.
+
+
+===========================================================================
+                 Libchipcard 3.9.7beta (2007/11/07)
+===========================================================================
+
+This is a bugfix release.
+
+
+===========================================================================
+                 Libchipcard 3.9.6beta (2007/11/03)
+===========================================================================
+
+This release is now licensed under the LGPL. The CryptToken plugin for
+DDV cards now implementes more virtual functions. Some bugs have been
+fixed.
+
+
+===========================================================================
+                 Libchipcard 3.9.5beta (2007/11/02)
+===========================================================================
+
+This release adds some internal features which allow Kobil Kaan Advanced
+readers to really read German medical cards. Support for win32 platforms
+has been improved.
+
+
+===========================================================================
+                 Libchipcard 3.9.4beta (2007/10/27)
+===========================================================================
+
+This release adds support for the SCM SCR3311 reader. Libchipcard can now
+be installed locally (in this case it searches for all its file relative to
+the location of the executable).
+
+
+===========================================================================
+                 Libchipcard 3.9.3beta (2007/10/24)
+===========================================================================
+
+This is the first release of the new generation which works nicely on
+Windows platforms as well. It is now also able to adapt to the different
+reader types when using Windows' SCard service (for now only Reiner SCT
+readers have been tested on win32 so far).
+This version now also supports German medical cards with some more readers
+by trying multiple protocols before giving up. This now allows to read those
+cards e.g. with the Kobil Kaan Advanced.
+
+
+===========================================================================
+                 Libchipcard 3.9.2beta (2007/09/11)
+===========================================================================
+
+This release has been adapted to the latest version of Gwenhywfar. It now 
+only uses libsysfs to scan for USB devices and therefore no longer depends
+on libusb. This fixes a problem with the USB suspend feature of recent
+Linux kernels. This release needs Gwenhywfar 2.9.2beta.
+
+
+===========================================================================
+                 Libchipcard 3.9.1beta (2007/05/14)
+===========================================================================
+
+This release adds support for the latest Cyberjack device. All refrences to
+Libchipcard3 have been renamed to simply Libchipcard (without a number). This
+also affects the configuration files and paths, so you will have to move your
+configuration files!
+
+
+===========================================================================
+                 Libchipcard 3.9.0beta (2007/05/03)
+===========================================================================
+
+This release fixes the problems with some IFD drivers which results from
+incorrect definitions of DWORD in libpcsclite. IFD drivers are now also
+found on SuSE systems. The driver description file for O2Micro has been fixed.
+WARNING: This version uses different paths for configuation files!!
+As of 3.9.0 Libchipcard no longer bears the major version number in its name
+or configuration files and paths.
+
+
+===========================================================================
+                 Libchipcard3 3.1.0beta (2007/04/03)
+===========================================================================
+
+This release adapts to the latest changes in Gwenhywfar. It now needs
+Gwenhywfar3. Some bugs have been fixed and two additional readers are now
+supported.
+
+
+===========================================================================
+                 Libchipcard3 3.0.2 (2006/12/27)
+===========================================================================
+
+This version fixes some bugs. The GeldKarte code is now able to read 
+transactions from newer GeldKarte cards (->AqGeldKarte now works with those
+cards as well).
+
+
+===========================================================================
+                 Libchipcard3 3.0.1 (2006/12/25)
+===========================================================================
+
+This version fixes some bugs, adds autodetection support for the 
+Cherry ST1044u reader and makes Libchipcard3 search for 64 bit drivers.
+
+
+===========================================================================
+                 Libchipcard3 3.0.0 (2006/11/02)
+===========================================================================
+
+This release adds the flag "keeprunning" to the SCM SPR532 reader (its
+proprietary driver doesn't like to shutdown and reload). This version should
+now work with any German medical card.
+
+
+===========================================================================
+                 Libchipcard3 2.9.4beta (2006/10/09)
+===========================================================================
+
+This release adds support for using the generic CCID driver with multiple 
+readers in parallel and also adds support for the SCM 3310. This version 
+supports external development of genuine Libchipcard3 drivers.
+
+
+===========================================================================
+                 Libchipcard3 2.9.3beta (2006/10/02)
+===========================================================================
+
+The slave manager has been completed, some errors have been fixed and this
+version now compiles and runs under Windows. Support for Mandriva has been
+added and clients can now receive notifications when readers are plugged in
+or out. Init scripts have been added.
+
+
+===========================================================================
+                 Libchipcard3 2.9.2beta (2006/09/26)
+===========================================================================
+
+After receiving feedback some bugs have been located and fixed (including
+a serious memory leak). A new method of making the server scan for hardware
+changes (triggered by POSIX signals) has been added.
+The CryptToken plugin for AqBanking has been moved into a separate RPM
+package.
+
+
+===========================================================================
+                 Libchipcard3 2.9.1beta1 (2006/09/25)
+===========================================================================
+
+This is the first beta release of Libchipcard3.
+The chipcard command and data structure handling has been moved from the
+server to the client so the server can now concentrate on ressource 
+management.
+The remote driver code has been removed. Instead the server now has three
+operation modes: stand-alone, master and slave. Devices on thin clients
+can now be added and removed to/from a central master server. This makes it
+very much easier to setup libchipcard3 on thin clients.
+In standalone mode the server behaves just like former versions with the
+same IPC connection modes.
+The chipcard3-tool now has an additional command: "monitor". This command
+makes the tool listen for changes on the server (such as drivers, readers
+and cards started/stopped etc).
+All IFD-alike drivers of Libchipcard2 have been merged into a single one
+which now handles all those drivers (IFD2, IFD3 and CCID - both pre and post
+1.1.0).
+Some important bugs have been fixed and the card command description files
+have been cleaned up.
+"chipcardd3 init" now works as expected (the corresponding code in 
+Libchipcard2 didn't work after some changes in Gwenhywfar some time ago).
+The client API has been abstracted more to prepare a Windows port of 
+Libchipcard3 (not yet finished).
+
+
+===========================================================================
+                 Libchipcard2 2.1.8 (2006/08/25)
+===========================================================================
+
+This release fixes a bug which prevented Libchipcard2 from autodetecting
+PCMCIA devices. This version now works with OpenSC 0.11.x as well.
+
+
+===========================================================================
+                 Libchipcard2 2.1.7 (2006/06/15)
+===========================================================================
+
+This version allows readers without a keyboard to verify the pin of a
+chipcard again. It also fixes a problem with newer GeldKarte cards and now
+uses LibSysFS primarily to detect /dev/ttyUSB devices.
+
+
+===========================================================================
+                 Libchipcard2 2.1.6 (2006/06/16)
+===========================================================================
+
+This version fixes a bug in the build system of 2.1.5 which prevented some
+users from compiling Libchipcard2.
+
+
+===========================================================================
+                 Libchipcard2 2.1.5 (2006/06/15)
+===========================================================================
+
+This version no longer requires the kernel sources to provide support for
+PCMCIA autoconfiguration. It also no longer needs a specially compiled
+version of libccid to work with that driver, the normal binary packages
+suffice.
+
+
+===========================================================================
+                 Libchipcard2 2.1.4 (2006/05/03)
+===========================================================================
+
+This release fixes some bugs with the CryptTokenDDV and libsysfs 2.0.
+
+
+===========================================================================
+                 Libchipcard2 2.1.3 (2006/03/26)
+===========================================================================
+
+This release fixes a bug which caused the chipcard-tool to segfault. The
+command "chipcardd2 addreader --dtype list" now works again.
+
+
+===========================================================================
+                 Libchipcard2 2.1.2 (2006/03/20)
+===========================================================================
+
+This release now works with Libsysfs 2.x.
+
+
+===========================================================================
+                 Libchipcard2 2.1.1 (2006/03/07)
+===========================================================================
+
+This release adapts the driver definition files for the Cyberjack to the
+latest driver release (2.0.10) and removes some debug messages.
+
+
+===========================================================================
+                 Libchipcard2 2.1.0 (2006/02/27)
+===========================================================================
+
+This release fixes a problem with Debian's libtool and cleans up the API.
+
+
+===========================================================================
+                 Libchipcard2 2.0.0 (2006/02/14)
+===========================================================================
+
+The latest beta versions seem to be stable, so the current version as been
+cleaned up regarding debug messages and released as stable version 2.0.0.
+
+
+===========================================================================
+                 Libchipcard2 1.9.20beta (2006/01/26)
+===========================================================================
+
+This release makes woring with chipcard crypttoken safer (it now uses
+functions to report a bad pins to the applications). Libchipcard2 now works
+with SCM 33X readers again.
+
+
+===========================================================================
+                 Libchipcard2 1.9.19beta (2005/12/15)
+===========================================================================
+
+This release adds support for Kobil Kaan Advanced (including the keypad) and
+adds generic support for CCID drivers again (already works with Kobil Kaan
+Advanced). It also improves the autoPort configuration of readers.
+
+
+===========================================================================
+                 Libchipcard2 1.9.18beta (2005/12/02)
+===========================================================================
+
+This release fixes some minor bugs. Introduced direct reader usage for clients
+(needed for Reiner SCT Ecom Biometrics).
+
+
+===========================================================================
+                 Libchipcard2 1.9.17beta (2005/11/22)
+===========================================================================
+
+This release adapts to Gwenhywfar2, creates some needed folders and improves
+support for IFD drivers.

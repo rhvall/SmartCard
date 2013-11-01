@@ -1,0 +1,111 @@
+
+MY_CFLAGS=-ggdb -Wall -O -ggdb
+
+WIN32_OPTIONS=\
+  --host=i586-mingw32msvc \
+  --target=i586-mingw32msvc \
+  --enable-version-specific-runtime-libs \
+  --with-gcc \
+  --with-gnu-ld \
+  --without-x \
+  --enable-threads=win32 \
+  --disable-win32-registry
+
+MINGW32_PREFIX=/usr/i586-mingw32msvc
+WIN32_INSTALL_DIR=/home/martin/install/win32
+
+default: all
+
+dist:
+	@echo "This file is to make it easier for you to create all you need"
+	aclocal -I ./m4
+	autoheader
+# use --include-deps, if you want to release the stuff. Don't use it for
+# yourself
+	automake --include-deps
+	autoconf
+	touch stamp-h.in
+	rm -f `find . -name \*~`
+	rm -Rf `find . -type d -name CVS`
+	rm -f `find . -type f -name .cvsignore`
+	#rm -f `find . -type f -name Makefile.am`
+	#rm -f configure.in
+	rm -Rf apidoc
+	rm -f Makefile.cvs
+
+cvsclean::
+	automake --include-deps
+	autoconf
+	touch stamp-h.in
+	rm -f `find . -name \*~`
+	rm -Rf apidoc
+
+all:
+	libtoolize -f --automake
+	@if test -r config.status; then \
+	   prefix=`grep '@prefix@' config.status |cut -d , -f 3`; \
+	   gwen_prefix=`grep '@gwenhywfar_dir@' config.status |cut -d , -f 3`; \
+	 fi; \
+	 for A in "$${gwen_prefix}/share/aclocal" "$${prefix}/share/aclocal" m4; do \
+	   if test -d "$${A}"; then \
+	     ACLOCAL_FLAGS="$${ACLOCAL_FLAGS} -I $${A}"; \
+	   fi; \
+	 done; \
+	 echo "aclocal $${ACLOCAL_FLAGS}"; \
+	 aclocal $${ACLOCAL_FLAGS} || (echo -e '***\n*** If the line above shows the error message "macro AC_GWENHYWFAR not \n*** found", you need to specify the environment variable ACLOCAL_FLAGS \n*** to be "-I GWENHYWFAR_PREFIX/share/aclocal". For example, do the following:\n***\n***   export ACLOCAL_FLAGS="-I ${HOME}/usr/share/aclocal"\n***   make -f Makefile.cvs\n***'; exit 1)
+	autoheader
+	automake --add-missing
+	autoconf
+	@echo "Now you can run ./configure"
+
+mp:
+	libtoolize -f --automake
+	aclocal -I ./m4
+	autoheader
+	automake --add-missing
+	autoconf
+	CFLAGS="$(MY_CFLAGS)" CXXFLAGS="$(MY_CFLAGS)" ./configure --enable-maintainer-mode
+
+clang:
+	libtoolize -f --automake
+	aclocal -I ./m4
+	autoheader
+	automake --add-missing
+	autoconf
+	CFLAGS="$(MY_CFLAGS)" CXXFLAGS="$(MY_CFLAGS)" \
+	  CC=clang \
+	  CXX=clang \
+	  ./configure --enable-maintainer-mode
+
+mp-priv:
+	libtoolize -f --automake
+	aclocal -I ./m4
+	autoheader
+	automake --add-missing
+	autoconf
+	CFLAGS="$(MY_CFLAGS)" CXXFLAGS="$(MY_CFLAGS)" ./configure --prefix=/opt/devel/4 --enable-maintainer-mode --with-gwen-dir=/opt/devel/4
+
+mp-w32:
+	libtoolize -f --automake
+	aclocal -I ./m4
+	autoheader
+	automake --add-missing
+	autoconf
+	CFLAGS="$(MY_CFLAGS) -I$(WIN32_INSTALL_DIR)/include" CXXFLAGS="-ggdb -Wall -I$(WIN32_INSTALL_DIR)/include" \
+        DLLTOOL=i586-mingw32msvc-dlltool \
+	OBJDUMP=i586-mingw32msvc-objdump \
+	LD=i586-mingw32msvc-ld \
+	AR=i586-mingw32msvc-ar \
+	NM=i586-mingw32msvc-nm \
+	RANLIB=i586-mingw32msvc-ranlib \
+	STRIP=i586-mingw32msvc-strip \
+	STRIPPROG=i586-mingw32msvc-strip \
+	AS=i586-mingw32msvc-as \
+	RC=i586-mingw32msvc-windres \
+	./configure \
+	  --enable-maintainer-mode \
+	  --prefix=$(WIN32_INSTALL_DIR) $(WIN32_OPTIONS) \
+	  --enable-release \
+	  --with-gwen-dir=$(WIN32_INSTALL_DIR)
+
+

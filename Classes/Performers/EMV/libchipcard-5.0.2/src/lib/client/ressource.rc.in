@@ -1,0 +1,63 @@
+/***************************************************************************
+ $RCSfile$
+                             -------------------
+    cvs         : $Id$
+    begin       : Mon Mar 01 2004
+    copyright   : (C) 2004 by Martin Preuss
+    email       : martin@libchipcard.de
+
+ ***************************************************************************
+ *          Please see toplevel file COPYING for license details           *
+ ***************************************************************************/
+
+
+#include <windows.h>
+
+// Language: 407=DE, 409=US, 809=UK
+
+// German resources
+
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+
+// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+// Version
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION @CHIPCARD_VERSION_MAJOR@,@CHIPCARD_VERSION_MINOR@,@CHIPCARD_VERSION_PATCHLEVEL@,0
+ PRODUCTVERSION @CHIPCARD_VERSION_MAJOR@,@CHIPCARD_VERSION_MINOR@,@CHIPCARD_VERSION_PATCHLEVEL@,0
+ FILEFLAGSMASK 0x3fL
+ FILEFLAGS 0x0L
+ FILEOS 0x40004L      // Windows NT
+ FILETYPE 0x2L        // DLL
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704b0"
+        BEGIN
+            //VALUE "Comments", "\0"
+            VALUE "CompanyName", " Aquamaniac\0"
+            VALUE "FileDescription", "Library for easy access to chipcards\0"
+            VALUE "FileVersion", "v@CHIPCARD_VERSION_STRING@\0"
+            VALUE "InternalName", "LibChipCard2\0"
+            VALUE "LegalCopyright", "Copyright © 2005 by Martin Preuss\0"
+            VALUE "LegalTrademarks", "Aquamaniac\0"
+            VALUE "OriginalFilename", "LIBCHIPCARD2C32_@LIBCHIPCARD_SO_EFFECTIVE@.DLL\0"
+            //VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "LibChipCard2\0"
+            VALUE "ProductVersion", "v@CHIPCARD_VERSION_STRING@\0"
+            VALUE "Author", "Martin Preuss\0"
+            VALUE "Email", "martin@libchipcard.de\0"
+            VALUE "Homepage", "http://www.libchipcard.de\0"
+            VALUE "Description", "Client library.\0"
+			VALUE "License", "GPL\0"
+            //VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+

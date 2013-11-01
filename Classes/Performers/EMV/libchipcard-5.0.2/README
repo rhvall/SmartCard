@@ -1,0 +1,385 @@
+
+                                 Content
+              -------------------------------------------------------
+               1. Introduction
+               2. Needed Components
+               3. Server Setup
+               3.1. Security Mode
+               3.2. Adding Readers
+               3.3. File Permissions
+               4. Starting The Daemon
+               4.1. Disabling Poll Mode
+               5. Server Environment Variables
+               6. Client Setup
+               7. Using Libchipcard in your own Projects
+               8. Using Libchipcard With MacOS
+               9. Special Drivers and Readers
+               9.1. Generic CCID Driver
+               9.2. Reiner SCT Cyberjack
+               9.3. Omnikey CardMan 4000
+               9.4. SCM SPR 532
+              10. Distribution Specific Notes
+              11. Updating from Versions before 3.9.1
+              12. Projects Using Libchipcard
+              -------------------------------------------------------
+
+
+
+1. Introduction
+===============
+
+Libchipcard is a library for generic access to chipcard readers. It contains
+a complete ressource manager and uses the hardware drivers provided by
+manufacturers of card readers. The number of readers to be used in parallel
+is unbound.
+
+Libchipcard has some advantages over existing card reader ressource managers:
+ - autodetection of readers at multiple buses
+ - readers are only allocated upon request by a client (while no client needs
+   access to a given reader this reader is not accessed by Libchipcard)
+ - it provides a fake CTAPI which can be used by any CTAPI-aware program
+   to use Libchipcard via CTAPI
+
+Libchipcard autodetects and automatically configures readers at the following
+buses:
+ - raw USB
+ - USB serial
+ - PCI
+ - PCMCIA
+
+Libchipcard has been tested by myself with the following readers:
+- Kobil Kaan Advanced USB (works)
+- Towitoko Chipdrive Micro (serial, works)
+- old Reiner SCT Cyberjack (0x100, works)
+- new Reiner SCT Cyberjack (0x300, works)
+- old Reiner SCT Cyberjack ECom (works)
+- new Reiner SCT Cyberjack ECom (works)
+- Omnikey CardMan 3621 (USB, works)
+- Omnikey CardMan 4000 (PCMCIA, works)
+- Cherry G80-1501 (mode 2, works)
+- Cherry G80-1502 (mode 2, works)
+- SCM SCR 3310 (works)
+- SCM SCR 3311 (works)
+- SCM SPR 532 (works with original driver, see 9.4)
+
+
+
+2. Needed Components
+====================
+
+Libchipcard needs the following packages:
+- Gwenhywfar http://gwenhywfar.sf.net/          [required]
+- LibSysFS   http://linux-diag.sf.net/          [strongly recommended]
+
+If LibSysFS is available then the PCMCIA scanner code is built. This allows to
+detect PCMCIA-based card readers. This library is also needed to scan for
+USB devices.
+If LibSysFS is missing autoconfiguration of USB devices is not possible.
+
+
+
+3. Server Setup
+===============
+
+The chipcard daemon uses the configuration file 
+    $PREFIX/etc/chipcard/server/chipcardd.conf
+
+This file contains a description of which drivers to load and a list of
+configured readers.
+
+You can copy one of the example files installed to 
+"$PREFIX/etc/chipcard/server/". For USB-only readers the minimal example
+can be used. For serial devices the file "chipcardd3.conf.example" can be used
+as a starting point.
+
+
+3.1. Security Mode
+------------------
+
+The underlying IPC (interprocess communication) model used allows a variety
+of security modes:
+ 
+ a) local
+    This mode uses Unix Domain Sockets. These sockets are only available on
+    POSIX systems (not on WIN32 platforms), they can only be connected to from
+    the very same machine.
+    This is the recommended mode for local-only usage.
+    
+ b) public
+    This mode uses simple TCP sockets for IPC. You should not use this mode
+    since it does not provide any encryption.
+ 
+ c) private
+    This mode uses SSL secured sockets. This is the recommended mode on
+    systems where there are no Unix Domain Sockets (i.e. the "local" mode is
+    not available).
+    
+ d) secure
+    This mode is the same as "private", but it requires the client to present
+    a valid certificate. This certificate is looked up in a directory on the
+    server and if not found access will be denied.
+    You can use this mode if you want to be very safe. It also allows the
+    server to distinguish between multiple users accessing the server, so that
+    administration accounts can be realized (which will only allow special
+    users to execute administrative commands).
+
+For security modes "private" and "secure" some additional setup is to be done.
+You can do most of that additional setup with the following command:
+
+#>chipcardd init
+
+This will create all files necessary for "private" or "secure" mode (such as
+Diffie-Hellman-parameters, a self-signed certificate etc).
+
+You have to create the server configuration file first (e.g. by just copying
+one of the example files provided by this package).
+
+Please refer to the file doc/CERTIFICATES for details.
+
+
+3.2. Adding Readers
+-------------------
+
+#>chipcardd3 addreader --rname ARG --dtype ARG --rtype ARG --rport ARG
+
+Adds a reader to the configuration. Please see "chipcardd3 --help".
+
+
+3.3. File Permissions
+---------------------
+
+Some systems (namely Debian) provide packages which start the chipcard daemon
+as a special user ("chipcard") instead of root.
+However, you have to make sure that this special user is able to access the
+card reader (normally he isn't).
+
+
+
+4. Starting The Daemon
+======================
+
+"chipcardd4 --help" lists all possible command line arguments.
+
+However, in most cases the following does suffice:
+
+#>chipcardd4 --pidfile PIDFILENAME
+where PIDFILENAME is the name of the PID file (used to store the process id
+of the server which can be used to send signals to it).
+
+
+For debugging purposes the following is more usefull:
+
+#>chipcardd4 --pidfile PIDFILENAME -f --logtype console --loglevel notice
+
+For "loglevel" you can use "--loglevel info" to increase the verbosity even
+more. 
+The option "-f" makes the daemon stay in the foreground. In this case you can
+stop it using CTRL-C.
+
+
+Please note that the server doesn't start if there is no line in the
+configuration file saying "enabled=1".
+
+
+4.1. Disabling Poll Mode
+------------------------
+
+The default setting of Libchipcard is to scan every 1-2 seconds for new
+hardware. However, on modern udev-based systems this polling can be avoided
+by setting "hardwareScanInterval" in the section "DeviceManager" of the server
+configuration file "chipcardd.conf" to "0".
+The daemon will then only initially scan for connected hardware. It can be
+notified about hardware changes via signals (SIGUSR2). Upon receiption of this
+signal the daemon immediately scans for new hardware 
+(e.g. "killall -SIGUSR2 chipcardd" will trigger a hardware scan).
+
+
+
+5. Server Environment Variables
+===============================
+
+
+LCDM_DRIVER_LOGLEVEL
+--------------------
+Loglevel to be used for drivers. 
+Version before 1.9.16alpha used LC_DRIVER_LOGLEVEL" instead.
+
+
+LCSV_SERVICE_LOGLEVEL
+---------------------
+Loglevel to be used for services. 
+Version before 1.9.16alpha used "LC_SERVICE_LOGLEVEL" instead.
+
+
+LC_CTAPI_LOGLEVEL
+-----------------
+Loglevel to be used by the fake CTAPI.
+
+
+
+
+6. Client Setup
+===============
+
+Clients for libchipcard use the configuration file 
+    $PREFIX/etc/chipcard/client/chipcardc.conf
+
+This file contains a description of the chipcard servers to connect to.
+
+
+
+7. Using Libchipcard in your own Projects
+==========================================
+
+Please have a look at the file in tutorials/. They pretty much explain how
+Libchipcard can be used.
+
+
+
+8. Using Libchipcard With MacOS
+================================
+
+The following commands will compile Libchipcard on MacOS:
+
+--------------------------------------------------------------------------------------
+./configure --prefix=/sw LDFLAGS=-L/sw/lib CFLAGS=-I/sw/include CPPFLAGS=-I/sw/include
+make
+sudo make install
+--------------------------------------------------------------------------------------
+
+The configuration files are then expected in /sw/chipcard/server.
+
+
+
+9. Special Drivers and Readers
+===============================
+
+Most USB readers (like Cherry ST-1044u) might need you to add the following
+udev rule to your system (e.g. by creating a file with the following lines
+in /etc/udev/rules.d) when using Debian (or Ubuntu):
+
+-------------------------------------------------------------------X8
+SYSFS{idVendor}=="046a", SYSFS{idProduct}=="002d", GROUP="chipcard"
+-------------------------------------------------------------------X8
+
+This example is for the Cherry reader, for your reader you will have to use
+the correct values for "idVendor" and "idProduct".
+
+
+9.1. Generic CCID Driver
+-------------------------
+
+Libchipcard has improved support for this GPL licensed driver. It can use 
+this driver as installed by your distribution (tested with Debian's binary
+packages).
+
+However, if you need to compile the driver yourself some precautions have to
+be taken:
+Recent versions of this driver need libpcsclite installed at build-time, 
+but not at runtime. So please do this:
+- install libcpsclite (and devel-packages, if any)
+- compile the driver
+- deinstall libpcsclite (because it might want to start the PC/SC daemon which
+  unfortunately tries to completely take over control over all card readers it
+  can lay its hands on)
+
+It is safe to leave the package libpcsclite on Debian installed, but the
+package containing the PC/SC daemon (pcscd) MUST NOT be installed, because
+that daemon grabs all readers it can find so other daemons (like the quite
+cooperative daemon of Libchipcard) are unable to use them.
+
+
+9.2. Reiner SCT Cyberjack
+--------------------------
+
+If you are using a Reiner SCT Cyberjack card reader on Debian then you should
+issue the following command to grant libchipcard access to the reader:
+ "gpasswd -a chipcard cyberjack".
+This adds the user "chipcard" (under which the chipcard daemon runs on Debian)
+to the group "cyberjack" thus allowing libchipcard to access this driver.
+
+
+9.3. Omnikey CardMan 4000
+--------------------------
+
+Current kernels (2.6.17 as of this writing) already include the module needed
+to access the reader at kernel level (module "cm4000_cs").
+However, you will need the CardMan driver package from Omnikey which contains
+the library "libcm4000.so".
+
+Please download that package from http://www.omnikey.com/. The package
+contains a script called "install". 
+
+DO NOT USE THAT!
+
+Just copy the included file "libcm4000.so" to /usr/lib/. That's all.
+
+If your system starts the chipcard server as a user other than root (e.g. 
+Debian does this) you should add the following udev rule (e.g. write the 
+following line into a file and place it under "/etc/udev/rules.d"):
+
+--------------------------------------------X8
+SUBSYSTEM="cardman_4000", GROUP="chipcard"
+--------------------------------------------X8
+
+This grants Libchipcard access to the cardman as soon as the reader is
+plugged-in.
+
+
+9.4. SCM SPR 532
+----------------
+
+Libchipcard no longer uses the generic CCID driver for this reader because
+with that driver it is impossible to perform secure verification or
+modification. Therefore we fallback to the driver of the manufacturer.
+However, this needs the reader to have the old firmware 4.15 installed, newer
+versions do not work.
+You can get the driver and firmware from http://www.libchipcard.de/.
+
+
+
+10. Distribution Specific Notes
+===============================
+
+
+10.1. Debian
+------------
+
+Debian packages use a special user which runs the chipcard server: "chipcard".
+This user must have the permissions to access the device files needed by the
+different drivers.
+
+
+
+11. Updating from Versions before 3.9.1
+=======================================
+
+Starting with Libchipcard 3.9.1beta all references to the major version have
+been removed. This means that the server configuration is no longer searched
+for in $PREFIX/etc/chipcard3/server but in $PREFIX/etc/chipcard/server
+instead. Also the name of the file has been changed from chipcardd3.conf to
+chipcardd.conf.
+
+This is also true for client configuration files.
+
+
+
+12. Projects Using Libchipcard
+===============================
+
+The following is a list of projects which use Libchipcard. This list
+is rather incomplete, please contact the author if you want your project
+listed here as well.
+
+ - AqBanking
+ - QBankManager (via AqBanking)
+ - Gnucash (via AqBanking)
+ - KMyMoney (via AqBanking)
+ - Grisbi (via AqBanking)
+ - Gnumed
+
+
+Martin Preuss, Hamburg/Germany, 2007/10/27
+
+
+

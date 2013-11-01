@@ -1,0 +1,123 @@
+
+<!-- 
+  This is a file to be processed by Gwenhywfar's tool typemaker 
+  It creates the necessary files to implement the types listed herein.
+  I you make any changes to this file do a "make types" in this folder.
+-->
+
+<typedefs>
+  <type id="GWEN_TIME" >
+    <functions>
+      <function type="todb" name="GWEN_Time_toDb" />
+      <function type="fromdb" name="GWEN_Time_fromDb" />
+      <function type="dup" name="GWEN_Time_dup" />
+      <function type="free" name="GWEN_Time_free" />
+    </functions>
+  </type>
+
+</typedefs>
+
+
+<types>
+  <type id="LC_HI_PERSONAL_DATA" 
+        filename="hipersonaldata"
+        prefix="LC_HIPersonalData"
+        class="HIPersonalData"
+        access="public"
+        list="lib"
+        list2="lib" >
+    <headers>
+      <header type="sys" >chipcard/chipcard.h</header>
+      <header type="sys" >gwenhywfar/gwentime.h</header>
+    </headers>
+
+    <subtypes>
+      <type id="SEX" prefix="Sex" mode="enum" access="public" >
+        <values>
+          <value>male
+            <descr>
+              Male.
+            </descr>
+          </value>
+          <value>female
+            <descr>
+              Female.
+            </descr>
+          </value>
+        </values>
+      </type>
+    </subtypes>
+    
+    
+    <elem name="insuranceId" type="char" ptr="1" />
+
+    <elem name="prename" type="char" ptr="1" />
+    <elem name="name" type="char" ptr="1" />
+    <elem name="title" type="char" ptr="1" />
+    <elem name="nameSuffix" type="char" ptr="1" />
+    
+    <elem name="sex" type="SEX" />
+    <elem name="dateOfBirth" type="GWEN_TIME" ptr="1" />
+    
+    <elem name="addrZipCode" type="char" ptr="1" />
+    <elem name="addrCity" type="char" ptr="1" />
+    <elem name="addrState" type="char" ptr="1" />
+    <elem name="addrCountry" type="char" ptr="1" />
+    <elem name="addrStreet" type="char" ptr="1" />
+    <elem name="addrHouseNum" type="char" ptr="1" />
+  </type>
+
+
+
+  <type id="LC_HI_INSURANCE_DATA" 
+        filename="hiinsurancedata"
+        prefix="LC_HIInsuranceData"
+        class="HIInsuranceData"
+        access="public"
+        list="lib"
+        list2="lib" >
+    <headers>
+      <header type="sys" >chipcard/chipcard.h</header>
+      <header type="sys" >gwenhywfar/gwentime.h</header>
+    </headers>
+
+    <elem name="institutionId" type="char" ptr="1" />
+
+    <elem name="institutionName" type="char" ptr="1" />
+
+    <elem name="coverBegin" type="GWEN_TIME" ptr="1" />
+    <elem name="coverEnd" type="GWEN_TIME" ptr="1" />
+
+    <elem name="status" type="char" ptr="1" >
+      <descr>
+        1: selbstversichert
+      </descr>
+    </elem>
+
+    <elem name="group" type="char" ptr="1" >
+      <descr>
+         '1': x="west"; break;
+         '9': x="ost"; break;
+         '6': x="BVG"; break;
+         '7': x="SVA, nach Aufwand, dt.-nl Grenzgaenger"; break;
+         '8': x="SVA, pauschal"; break;
+         'M': x="DMP Diabetes mellitus Typ 2, west"; break;
+         'X': x="DMP Diabetes mellitus Typ 2, ost"; break;
+         'A': x="DMP Brustkrebs, west"; break;
+         'C': x="DMP Brustkrebs, ost"; break;
+         'K': x="DMP KHK, west"; break;
+         'L': x="DMP KHK, ost"; break;
+         '4': x="nichtversicherter Sozialhilfe-Empfaenger"; break;
+         'E': x="DMP Diabetes mellitus Typ 1, west"; break;
+         'N': x="DMP Diabetes mellitus Typ 1, ost"; break;
+         'D': x="DMP Asthma bronchiale, west"; break;
+         'F': x="DMP Asthma bronchiale, ost"; break;
+         'S': x="DMP COPD, west"; break;
+         'P': x="DMP COPD, ost"; break;
+      </descr>
+    </elem>
+  </type>
+  
+  
+  
+</types>

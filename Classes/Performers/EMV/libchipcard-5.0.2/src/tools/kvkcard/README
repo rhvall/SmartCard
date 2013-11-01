@@ -1,0 +1,28 @@
+
+
+Running in Daemon Mode
+======================
+
+You can run the tool "kvkread" in daemon mode by using the following
+command:
+"kvkread daemon"
+
+This command allows to set the name and arguments of a program to be called
+when there is a card inserted (arguments "-p" and "-a").
+
+There is a specialty with the "-a" argument: All occurrences of 
+"@cardid@" are replaced by the card id of the actual card in hexadecimal
+form (e.g. "0x12345678").
+
+If the argument "-p" is missing then the following will be used:
+  - for "-p": "kvkread"
+  - for "-a": "read -b -d -c @cardid@ -f kvkcard-@cardid@.dat"
+This makes the tool write the data of every German medical card to a file
+in the current folder with the card id as part of the filename.
+
+If an error occurs the tool will beep 3 times, on success it will beep
+only once (that's a result of the switch "-b" used by default).
+
+If the switch "-d" was given to kvkread in daemon mode it will propagate
+this switch to the called "kvkread" thus making it write DOS files.
+

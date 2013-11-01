@@ -1,0 +1,67 @@
+# $Id: chipcard-client-config.in.in 217 2006-09-08 02:37:16Z martin $
+# Author of this file: Martin Preuss<martin@libchipcard.de>
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+datarootdir=@datarootdir@
+datadir=@datadir@
+
+result=""
+
+for d in $*; do
+    case $d in
+	--includes)
+	    result="$result @libchipcard_includes@ @gwenhywfar_includes@"
+	    ;;
+	--client-libs)
+	    result="$result @libchipcardc_libs@"
+	    ;;
+	--vmajor)
+	    result="$result @CHIPCARD_VERSION_MAJOR@"
+	    ;;
+	--vminor)
+	    result="$result @CHIPCARD_VERSION_MINOR@"
+	    ;;
+	--vpatchlevel)
+	    result="$result @CHIPCARD_VERSION_PATCHLEVEL@"
+	    ;;
+	--vbuild)
+	    result="$result @CHIPCARD_VERSION_BUILD@"
+	    ;;
+	--vtag)
+	    result="$result @CHIPCARD_VERSION_TAG@"
+	    ;;
+        --vstring)
+	    result="$result @CHIPCARD_VERSION_MAJOR@.@CHIPCARD_VERSION_MINOR@.@CHIPCARD_VERSION_PATCHLEVEL@"
+            ;;
+	--client-datadir)
+	    result="$result @lc_client_xml_dir@"
+	    ;;
+	--server-datadir)
+	    result="$result @lc_server_data_dir@"
+	    ;;
+	--driverdir)
+	    result="$result @lc_server_driver_dir@"
+	    ;;
+	--servicedir)
+	    result="$result @lc_server_service_dir@"
+	    ;;
+	*)
+	    echo "Usage:"
+	    echo "$0 --includes gives you the include flags"
+	    echo "$0 --client-libs gives the client library flags"
+	    echo "$0 --vmajor gives the major version of LibChipcard"
+	    echo "$0 --vminor gives the minor version of LibChipcard"
+	    echo "$0 --vpatchlevel gives the patchlevel of LibChipcard"
+	    echo "$0 --vbuild gives the build number of LibChipcard"
+	    echo "$0 --vtag gives the tag of LibChipcard (cvs, beta or stable)"
+	    echo "$0 --vstring returns a version string"
+	    echo "$0 --client-datadir returns the data folder of the client"
+	    echo "$0 --server-datadir returns the data folder of the server"
+	    echo "$0 --driverdir returns the folder which contains drivers"
+	    exit 1
+	    ;;
+    esac
+done
+echo $result

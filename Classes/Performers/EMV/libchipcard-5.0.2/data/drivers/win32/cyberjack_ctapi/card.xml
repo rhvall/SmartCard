@@ -1,0 +1,151 @@
+<cards>
+  <card name="card" >
+
+    <commands>
+
+      <!-- Secure PIN verification using the reader's keypad: FPIN2 -->
+      <command name="IsoPerformVerification_Fpin2" target="card" 
+               driver="cyberjack_pcsc">
+        <send>
+	  			<APDU>
+  	    		<ELEM type="dword">0x20180100</ELEM>
+	  			</APDU>
+	  			<DATA>
+	    			<ELEM type="bytes" storedAs="bytes" >
+              52 0f 02 06 00 20 00 
+            </ELEM>
+            <elem name="pid" type="byte" />
+	    			<ELEM type="bytes" storedAs="bytes" >
+              08 28 ff ff ff ff ff ff ff
+            </ELEM>
+          </DATA>
+				</send>
+				<results>
+      		<result sw1="0x90" type="success" >
+            PIN ok
+          </result>
+      		<result sw1="0x63" sw2="0xc0" type="error" >
+            Bad PIN (only one try left !)
+          </result>
+      		<result sw1="0x63" type="error" >Bad PIN</result>
+      		<result sw1="0x63" sw2="0xc1" type="error" >
+            Bad PIN (only two tries left !)
+          </result>
+      		<result sw1="0x63" sw2="0xc2" type="error" >
+            Bad PIN (only three tries left !)
+          </result>
+      		<result sw1="0x69" sw2="0x83" type="error" >
+            Card seems to be destroyed, this might have the following reasons:
+             1) you entered a bad PIN too often
+             2) the card is of a new and yet unknown type
+          </result>
+      		<result sw1="0x64" sw2="0x00" type="error" >
+            Verification aborted due to timeout
+          </result>
+      		<result sw1="0x64" sw2="0x01" type="error" >
+            Verification aborted by user
+          </result>
+				</results>
+      </command>
+
+      <!-- Secure PIN verification using the reader's keypad: ASCII -->
+      <command name="IsoPerformVerification_Ascii" target="card" 
+               driver="cyberjack_pcsc">
+        <send>
+	  			<APDU>
+  	    		<ELEM type="dword">0x20180100</ELEM>
+	  			</APDU>
+	  			<DATA>
+	    			<ELEM type="bytes" storedAs="bytes" >
+              52 0f 01 06 00 20 00
+            </ELEM>
+            <ELEM name="pid" type="byte" />
+	    			<ELEM type="bytes" storedAs="bytes" >
+              08 20 20 20 20 20 20 20 20
+            </ELEM>
+          </DATA>
+				</send>
+				<results>
+      		<result sw1="0x90" type="success" >
+            PIN ok
+          </result>
+      		<result sw1="0x63" sw2="0xc0" type="error" >
+            Bad PIN (only one try left !)
+          </result>
+      		<result sw1="0x63" type="error" >Bad PIN</result>
+      		<result sw1="0x63" sw2="0xc1" type="error" >
+            Bad PIN (only two tries left !)
+          </result>
+      		<result sw1="0x63" sw2="0xc2" type="error" >
+            Bad PIN (only three tries left !)
+          </result>
+      		<result sw1="0x69" sw2="0x83" type="error" >
+            Card seems to be destroyed, this might have the following reasons:
+             1) you entered a bad PIN too often
+             2) the card is of a new and yet unknown type
+          </result>
+      		<result sw1="0x64" sw2="0x00" type="error" >
+            Verification aborted due to timeout
+          </result>
+      		<result sw1="0x64" sw2="0x01" type="error" >
+            Verification aborted by user
+          </result>
+				</results>
+      </command>
+
+
+      <command name="IsoPerformModification_Ascii" 
+               target="card" driver="cyberjack_pcsc" >
+        <send>
+	  			<APDU>
+  	    		<ELEM type="dword">0x20190100</ELEM>
+	  			</APDU>
+	  			<DATA>
+	    			<ELEM type="bytes" storedAs="bytes" >
+              52 18 01 06 0e 00 24 00
+            </ELEM>
+            <ELEM name="pid" type="byte" />
+	    			<ELEM type="bytes" storedAs="bytes" >
+              10 20 20 20 20 20 20 20 20
+                 20 20 20 20 20 20 20 20
+            </ELEM>
+          </DATA>
+				</send>
+				<results>
+      		<result sw1="0x90" type="success" >
+            PIN ok
+          </result>
+      		<result sw1="0x63" sw2="0xc0" type="error" >
+            Bad PIN (only one try left !)
+          </result>
+      		<result sw1="0x63" type="error" >Bad PIN</result>
+      		<result sw1="0x63" sw2="0xc1" type="error" >
+            Bad PIN (only two tries left !)
+          </result>
+      		<result sw1="0x63" sw2="0xc2" type="error" >
+            Bad PIN (only three tries left !)
+          </result>
+      		<result sw1="0x69" sw2="0x83" type="error" >
+            Card seems to be destroyed, this might have the following reasons:
+             1) you entered a bad PIN too often
+             2) the card is of a new and yet unknown type
+          </result>
+      		<result sw1="0x64" sw2="0x00" type="error" >
+            Verification aborted due to timeout
+          </result>
+      		<result sw1="0x64" sw2="0x01" type="error" >
+            Verification aborted by user
+          </result>
+      		<result sw1="0x69" sw2="0x85" type="error" >
+            PIN is still initial PIN, please change it first.
+          </result>
+      		<result sw1="0x6a" sw2="0x88" type="error" >
+            Unknown PIN id.
+          </result>
+				</results>
+      </command>
+
+
+    </commands>
+  </card>
+</cards>

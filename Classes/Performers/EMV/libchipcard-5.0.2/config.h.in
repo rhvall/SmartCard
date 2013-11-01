@@ -1,0 +1,224 @@
+/* config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define if building universal (internal helper macro) */
+#undef AC_APPLE_UNIVERSAL_BUILD
+
+/* if DLL is to be built */
+#undef BUILDING_DLL
+
+/* Define if DLL is built */
+#undef BUILDING_LIBCHIPCARD2_DLL
+
+/* build */
+#undef CHIPCARD_VERSION_BUILD
+
+/* full version string */
+#undef CHIPCARD_VERSION_FULL_STRING
+
+/* major version */
+#undef CHIPCARD_VERSION_MAJOR
+
+/* minor version */
+#undef CHIPCARD_VERSION_MINOR
+
+/* patchlevel */
+#undef CHIPCARD_VERSION_PATCHLEVEL
+
+/* release string */
+#undef CHIPCARD_VERSION_RELEASE_STRING
+
+/* version string */
+#undef CHIPCARD_VERSION_STRING
+
+/* tag */
+#undef CHIPCARD_VERSION_TAG
+
+/* whether local install is wanted */
+#undef ENABLE_LOCAL_INSTALL
+
+/* visibility */
+#undef GCC_WITH_VISIBILITY_ATTRIBUTE
+
+/* if memory debugging is wanted */
+#undef GWEN_MEMORY_DEBUG
+
+/* Define to 1 if you have the <arpa/inet.h> header file. */
+#undef HAVE_ARPA_INET_H
+
+/* Define to 1 if you have the `chmod' function. */
+#undef HAVE_CHMOD
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the `fork' function. */
+#undef HAVE_FORK
+
+/* Define to 1 if you have the `getpid' function. */
+#undef HAVE_GETPID
+
+/* if gettext is available */
+#undef HAVE_GETTEXT_ENVIRONMENT
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the <libintl.h> header file. */
+#undef HAVE_LIBINTL_H
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the `random' function. */
+#undef HAVE_RANDOM
+
+/* Define to 1 if you have the `sigaction' function. */
+#undef HAVE_SIGACTION
+
+/* Define to 1 if you have the <signal.h> header file. */
+#undef HAVE_SIGNAL_H
+
+/* Define to 1 if you have the `snprintf' function. */
+#undef HAVE_SNPRINTF
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strcasecmp' function. */
+#undef HAVE_STRCASECMP
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strncasecmp' function. */
+#undef HAVE_STRNCASECMP
+
+/* Define to 1 if you have the `symlink' function. */
+#undef HAVE_SYMLINK
+
+/* Define to 1 if you have the <syslog.h> header file. */
+#undef HAVE_SYSLOG_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <sys/wait.h> header file. */
+#undef HAVE_SYS_WAIT_H
+
+/* Define to 1 if you have the `time' function. */
+#undef HAVE_TIME
+
+/* Define to 1 if you have the <time.h> header file. */
+#undef HAVE_TIME_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the `wait' function. */
+#undef HAVE_WAIT
+
+/* Path for locales */
+#undef I18N_PATH
+
+/* if system is big endian */
+#undef LC_ENDIAN_BIG
+
+/* if system is little endian */
+#undef LC_ENDIAN_LITTLE
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
+
+/* if BeOS is used */
+#undef OS_BEOS
+
+/* if Apple Darwin is used */
+#undef OS_DARWIN
+
+/* if FreeBSD is used */
+#undef OS_FREEBSD
+
+/* if linux is used */
+#undef OS_LINUX
+
+/* host system */
+#undef OS_NAME
+
+/* if NetBSD is used */
+#undef OS_NETBSD
+
+/* if OpenBSD is used */
+#undef OS_OPENBSD
+
+/* if PalmOS is used */
+#undef OS_PALMOS
+
+/* if this is a POSIX system */
+#undef OS_POSIX
+
+/* host system */
+#undef OS_SHORTNAME
+
+/* if Solaris is used */
+#undef OS_SOLARIS
+
+/* system type */
+#undef OS_TYPE
+
+/* if WIN32 is used */
+#undef OS_WIN32
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Version number of package */
+#undef VERSION
+
+/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+   significant byte first (like Motorola and SPARC, unlike Intel). */
+#if defined AC_APPLE_UNIVERSAL_BUILD
+# if defined __BIG_ENDIAN__
+#  define WORDS_BIGENDIAN 1
+# endif
+#else
+# ifndef WORDS_BIGENDIAN
+#  undef WORDS_BIGENDIAN
+# endif
+#endif
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const

@@ -1,0 +1,14 @@
+
+
+1. Introduction
+===============
+
+This folder contains driver definitions.
+Each subfolder contains at least a file called "driver.xml" which lists all
+readers support by a given driver and contains some other usefull information
+about it. There might also be more XML files which contain the driver-specific
+versions of commands for some cards. Basically abstraction of the driver and
+reader is done by those files.
+
+
+

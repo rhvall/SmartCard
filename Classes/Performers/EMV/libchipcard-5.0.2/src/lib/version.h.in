@@ -1,0 +1,41 @@
+/***************************************************************************
+ $RCSfile$
+                             -------------------
+    cvs         : $Id$
+    begin       : Tue Dec 23 2003
+    copyright   : (C) 2003 by Martin Preuss
+    email       : martin@libchipcard.de
+
+ ***************************************************************************
+ *                                                                         *
+ *   This library is free software; you can redistribute it and/or         *
+ *   modify it under the terms of the GNU Lesser General Public            *
+ *   License as published by the Free Software Foundation; either          *
+ *   version 2.1 of the License, or (at your option) any later version.    *
+ *                                                                         *
+ *   This library is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU     *
+ *   Lesser General Public License for more details.                       *
+ *                                                                         *
+ *   You should have received a copy of the GNU Lesser General Public      *
+ *   License along with this library; if not, write to the Free Software   *
+ *   Foundation, Inc., 59 Temple Place, Suite 330, Boston,                 *
+ *   MA  02111-1307  USA                                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+
+#ifndef CHIPCARD2_VERSION_H
+#define CHIPCARD2_VERSION_H
+
+#define CHIPCARD_VERSION_MAJOR @CHIPCARD_VERSION_MAJOR@
+#define CHIPCARD_VERSION_MINOR @CHIPCARD_VERSION_MINOR@
+#define CHIPCARD_VERSION_PATCHLEVEL @CHIPCARD_VERSION_PATCHLEVEL@
+#define CHIPCARD_VERSION_BUILD @CHIPCARD_VERSION_BUILD@
+#define CHIPCARD_VERSION_TAG "@CHIPCARD_VERSION_TAG@"
+#define CHIPCARD_VERSION_FULL_STRING "@CHIPCARD_VERSION_FULL_STRING@"
+#define CHIPCARD_VERSION_STRING "@CHIPCARD_VERSION_STRING@"
+
+
+#endif /* CHIPCARD2_VERSION_H */

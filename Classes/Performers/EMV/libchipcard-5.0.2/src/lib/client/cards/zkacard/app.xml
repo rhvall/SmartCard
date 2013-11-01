@@ -1,0 +1,140 @@
+<apps>
+  <app name="zkacard">
+
+    <formats>
+
+      <format name="EF_GD0">
+        <ELEM name="ICCSN" type="tlv" minnum="1" maxnum="1" >
+          <tlv id="0x5a">
+            <ELEM name="branchKey" type="byte" bcd="1"  />
+            <ELEM name="shortBankCode" type="bcd" size="3">
+              <DESCR>
+                First byte (BCD) shows the group:
+                  21: oeffentlich-rechtliche und private banken
+                  22: Privat- und Geschaeftsbanken
+                  25: Sparkassen
+                  26, 29: Genossenschaftsbanken
+              </DESCR>
+            </ELEM>
+            <ELEM name="cardNumber" type="bcd" size="5" />
+            <ELEM name="checksum" type="byte" bcd="1" />
+          </tlv>
+        </ELEM>
+      </format>
+
+    </formats>
+
+
+    <pins>
+      <pin name="ch_pin" encoding="ascii" id="0x03" 
+           minlen="4" maxlen="8" allowChange="1" filler="32" />
+<!--
+      <pin name="eg_pin" encoding="ascii" id="0x91" 
+           minlen="4" maxlen="8" allowChange="1" filler="32" />
+-->
+    </pins>
+
+
+    <files>
+      <ef name="EF_ID" sid="0x0003"
+          type="record" mode="linear" 
+          size="0" minnum="1" maxnum="1">
+        <record>
+          <ELEM name="branchKey" type="byte" bcd="1"  />
+          <ELEM name="shortBankCode" type="bcd" size="3">
+            <DESCR>
+              First byte (BCD) shows the group:
+                21: oeffentlich-rechtliche und private banken
+                22: Privat- und Geschaeftsbanken
+                25: Sparkassen
+                26, 29: Genossenschaftsbanken
+            </DESCR>
+          </ELEM>
+          <ELEM name="cardNumber" type="bcd" size="5" />
+          <ELEM name="checksum" type="byte" bcd="1" />
+          <ELEM name="validUntil" type="bytes" size="2">
+            <DESCR> YYMM (BSD)</DESCR>
+          </ELEM>
+          <ELEM name="validSince" type="bytes" size="3" >
+            <DESCR> YYMMDD (BCD)</DESCR>
+          </ELEM>
+          <ELEM name="country" type="word" bcd="1" />
+          <ELEM name="currency" type="ascii" 
+                size="3" filler="32" condense="1"  />
+          <ELEM name="factor" type="byte" >
+            <DESCR>
+              Binary coded:
+                01: 10^-2
+                02: 10^-1
+                04: 10^0
+                08: 10^1
+                10: 10^2
+                20: 10^3
+            </DESCR>
+          </ELEM>
+          <ELEM name="chipversion" type="byte" minnum="0" />
+          <ELEM name="filler" type="byte" minnum="0" />
+          <ELEM name="osversion" type="byte" minnum="0" />
+        </record>
+      </ef>
+
+      <ef name="EF_GD0" sid="0x2f02" 
+          type="transparent"
+          size="12" >
+        <DESCR>
+          This file contains the ICCSN according to ISO-7812-1
+        </DESCR>
+        <FORMAT type="EF_GD0" />
+      </ef>
+
+      <ef name="EF_PWDD" sid="0x0015"
+          type="record" mode="linear" 
+          size="0" minnum="1" maxnum="3">
+          <descr>
+            This file contains information about a PIN.
+          </descr>
+      </ef>
+
+
+      <df name="DF_SIG" lid="d27600006601" >
+
+        <files>
+          <ef name="EF_PWDD" sid="0x0015"
+              type="record" mode="linear" 
+              size="0" minnum="1" maxnum="1">
+              <descr>
+                This file contains information about the Signature PIN.
+              </descr>
+          </ef>
+
+          <ef name="EF_SSD" sid="0x1f00" 
+              type="transparent"
+              size="0" >
+            <DESCR>
+              This file contains the ICCSN according to ISO-7812-1
+            </DESCR>
+          </ef>
+          
+        </files>  
+      </df>
+
+
+      <df name="DF_NOTEPAD" lid="d2760000254e500100" >
+        <!-- verify ASCII pin 0x03 before accessing EF_NOTEPAD -->
+        <files>
+          <ef name="EF_NOTEPAD" sid="0xa611"
+              type="record" mode="linear" 
+              size="0" minnum="1" >
+              <descr>
+                This file contains user setup records.
+              </descr>
+          </ef>
+
+        </files>  
+      </df>
+      
+    </files>
+  </app>
+</apps>
+
+

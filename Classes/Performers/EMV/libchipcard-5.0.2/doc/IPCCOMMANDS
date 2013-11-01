@@ -1,0 +1,516 @@
+
+This file describes the format of the IPC commands used between server and
+client and between server and driver.
+
+This is internal information, do not consider it part of any API.
+
+
+2. Client And Server: Client Stuff
+==================================
+
+2.1. Client Ready
+-----------------
+
+2.1.1. Request
+
+ClientReady {
+  char Application="Hbcicard v1.0"
+  char GwenVersion="1.0"
+  char ChipcardVersion="1.0"
+  char System="Linux"
+}
+
+
+2.1.2. Response
+
+ClientReadyResponse {
+  char GwenVersion="1.0"
+  char ChipcardVersion="1.0"
+  char System="Linux"
+}
+
+
+
+2.2. TakeCard
+-------------
+
+2.2.1. Request
+
+TakeCard {
+  char CardId="0x12345678"
+}
+
+
+2.2.2. Response
+
+TakeCardResponse {
+  char CardId="0x12345678"
+  char Code="OK"           # or "ERROR"
+  char Text="Command ok"
+}
+
+
+
+2.3. CardAvailable
+------------------
+
+2.3.1. Request
+
+CardAvailable {
+  char CardId     ="0x12345678"
+  char CardType   ="PROCESSOR"     # or "MEMORY"
+  char CardTypes   ="DDV1"     # or any other card type whose definition
+                               # matches the ATR 
+  char ReaderFlags="DISPLAY", "KEYPAD"
+  bin ATR         ="01020304"
+}
+
+
+
+2.4. StartWait
+--------------
+
+2.4.1. Request
+
+StartWait {
+  char flags="KEYPAD", "DISPLAY"
+  char mask ="KEYPAD", "DISPLAY"
+}
+
+
+2.4.2. Response
+
+StartWaitResponse {
+  code="OK"     # or "ERROR"
+  text="ok"     # descriptive text
+}
+
+
+
+2.5. StopWait
+--------------
+
+2.5.1. Request
+
+StopWait {
+}
+
+
+2.5.2. Response
+
+StopWaitResponse {
+  code="OK"     # or "ERROR"
+  text="ok"     # descriptive text
+}
+
+
+
+2.6. GetDriverVar
+-----------------
+
+2.6.1. Request
+
+GetDriverVar {
+  char CardId     ="0x12345678"
+  char varName    ="testVar"
+}
+
+
+2.6.2. Response
+
+GetDriverVarResponse {
+  varName="testVar" 
+  varValue="Answer"  
+}
+
+
+
+2.8. Notifications (general)
+----------------------------
+2.8.1. Request
+
+Notification {
+  clientId="0x12345" # client id assigned by the server
+  ntype="driver"     # notification type
+  ncode="up"         # notification code
+
+  data {             # additional data for each notification type
+  }
+}
+
+
+2.9. Driver-Notifications
+-------------------------
+2.9.1. Request
+
+Notification {
+  clientId="0x12345" # client id assigned by the server
+  ntype="driver"     # notification type
+  ncode="up"         # notification code
+
+  data {                       # additional data for each notification type
+    driverId="0x12345"         # driver id assigned by the server
+    driverType="ctapi"         # driver type
+    driverName="ctapi_tow"     # driver name
+    libraryFile="/lib/libt.so" # library file used by the driver
+    info="blablabla"           # optional info (depending on "ncode")
+  }
+}
+
+
+
+2.10. Reader-Notifications
+-------------------------
+2.10.1. Request
+
+Notification {
+  clientId="0x12345" # client id assigned by the server
+  ntype="driver"     # notification type
+  ncode="up"         # notification code
+
+  data {                       # additional data for each notification type
+    readerId="0x12345"         # reader id assigned by the server
+    driverId="0x12345"         # driver id assigned by the server
+    readerType="tow_cdm"       # reader type
+    readerName="tow1"          # reader name
+    readerPort="1"             # port value
+    readerFlags="KEYPAD"       # reader flags
+    shortDescr="Towitoko Chip Drive Micro" # short description
+    info="blablabla"           # optional info (depending on "ncode")
+  }
+}
+
+
+
+2.11. CardCheck
+---------------
+
+2.11.1. Request
+
+CardCheck {
+  char CardId="0x12345678"
+}
+
+
+2.11.2. Response
+
+CardCheckResponse {
+  code="OK"     # or "REMOVED"
+  text="ok"     # descriptive text
+}
+
+
+2.12. CardReset
+---------------
+
+2.12.1. Request
+
+CardReset {
+  char CardId="0x12345678"
+}
+
+
+2.11.2. Response
+
+CardResetResponse {
+  code="OK"     #
+  text="ok"     # descriptive text
+}
+
+
+
+
+3. Driver And Server
+====================
+
+
+3.1. DriverReady
+----------------
+
+3.1.1. Request
+
+DriverReady {
+
+  # Driver id assigned by the server and transmitted via command line.
+  char DriverId="0x12345678"
+  
+  # Driver init result code. The following codes are allowed:
+  # - "OK"
+  # - "ERROR"
+  char Code="OK"
+  
+  # Text describing the code. This improves logging on the server side.
+  char Text="Driver ready"
+  
+  # This optional group contains a list of readers which are available
+  # via this driver. This is only supported by PC/SC drivers which allow
+  # to enumerate all readers available via PC/SC.
+  Readers {
+    Reader {
+      char Name="reader1"
+      char ReaderFlags="DISPLAY", "KEYPAD"
+    } # Reader
+  } # Readers
+}
+
+
+3.1.2. Response
+
+DriverReadyResponse {
+  # Result code. The following codes are allowed:
+  # - "OK"
+  # - "ERROR"
+  char Code="OK"
+
+  # Text describing the code. This improves logging on the driver side.
+  char Text="Driver registered"
+}
+
+
+
+4. Client And Server: Service
+=============================
+
+4.1. ServiceOpen
+----------------
+
+4.1.1. Request
+
+ServiceOpen {
+  char serviceId="12345678"       # either serviceId *or*
+  char serviceName="serviceName"  # serviceName must be given (XOR)
+  
+  command {
+    # this group contains service specific data
+  }
+}
+
+
+4.1.2. Response
+
+ServiceOpenResponse {
+  int code="0"                   # error code (0=ok)
+  char text="text"               # descriptive text
+  
+  char serviceId="12345"         # service id assigned by the server
+  char serviceName="ServiceName" # service name
+  char contextId="12345"         # context id assigned by the service
+  char serviceFlags="client", "autoload", "silent" # service flags
+  
+  service {
+    # this group contains any data the service sent with the message
+  }
+}
+
+
+
+4.2. ServiceClose
+-----------------
+
+4.2.1. Request
+
+ServiceClose {
+  char serviceId="12345"           # service id assigned by the server
+  char contextId="12345"           # context id assigned by the service
+}
+
+
+4.2.2. Response
+
+ServiceCloseResponse {
+  int code="0"                   # error code: success
+  char text="text"               # descriptive text
+  
+  char serviceId="12345"         # service id assigned by the server
+  char serviceName="ServiceName" # service name
+  char contextId="12345"         # context id assigned by the service
+  char serviceFlags="client", "autoload", "silent" # service flags
+  
+  service {
+    # this group contains any data the service sent with the message
+  }
+}
+
+
+
+4.3. ServiceCommand
+-------------------
+
+4.3.1. Request
+
+ServiceCommand {
+  char serviceId="12345"           # service id assigned by the server
+  char contextId="12345"           # context id assigned by the service
+  
+  command {
+    char name="CommandName"        # command name
+    # this group contains data for the command
+  }
+}
+
+
+4.3.2. Response
+
+ServiceCommandResponse {
+  int code="1"                     # result code (0 for success)
+  char text="error text"           # result text
+
+  char serviceId="12345"           # service id assigned by the server
+  char serviceName="ServiceName"   # service name
+  char contextId="12345"           # context id assigned by the service
+  char serviceFlags="client", "autoload", "silent" # service flags
+
+  char name="ResponseName"         # response name
+
+  command {
+    # this group contains the response from the service
+    # in case the "name" above is "error":
+    #  int code="1"                # error code
+    #  char text="error text"      # error text
+  }
+}
+
+
+
+
+
+5. Server And Service
+=====================
+
+
+5.1. ServiceOpen
+
+ServiceOpen {
+  char serviceId="12345"           # service id assigned by the server
+  char contextId="12345"           # context id assigned by the service
+
+  char clientId="12345"            # client id assigned by the server
+  char appName="app"
+  char userName="user"
+  
+  command {
+    # this group contains service specific data
+  }
+}
+
+
+5.1.2. Response
+
+5.1.2.1 Error Response
+
+ServiceOpenResponse {
+  int code="1"           # error code
+  char text="error text" # error text
+
+  service {
+    # this group contains any data the service sent withthe error message
+  }
+}
+
+
+5.1.2.2 Normal Response
+
+ServiceOpenResponse {
+  int code="0"                   # error code: success
+  char text="text"               # descriptive text
+  
+  char serviceId="12345"         # service id assigned by the server
+  char serviceName="ServiceName" # service name
+  char contextId="12345"         # context id assigned by the service
+  char serviceFlags="client", "autoload", "silent" # service flags
+  
+  service {
+    # this group contains any data the service sent with the message
+  }
+}
+
+
+
+5.2. ServiceClose
+
+ServiceClose {
+  char serviceId="12345"           # service id assigned by the server
+  char contextId="12345"           # context id assigned by the service
+
+  char clientId="12345"            # client id assigned by the server
+  char appName="app"
+  char userName="user"
+  
+  command {
+    # this group contains service specific data
+  }
+}
+
+
+5.2.2. Response
+
+5.2.2.1 Error Response
+
+ServiceCloseResponse {
+  int code="1"           # error code
+  char text="error text" # error text
+
+  service {
+    # this group contains any data the service sent withthe error message
+  }
+}
+
+
+5.2.2.2 Normal Response
+
+ServiceCloseResponse {
+  int code="0"                   # error code: success
+  char text="text"               # descriptive text
+  
+  char serviceId="12345"         # service id assigned by the server
+  char serviceName="ServiceName" # service name
+  char contextId="12345"         # context id assigned by the service
+  char serviceFlags="client", "autoload", "silent" # service flags
+  
+  service {
+    # this group contains any data the service sent with the message
+  }
+}
+
+
+
+5.3. ServiceCommand
+
+5.3.1. Request
+
+ServiceCommand {
+  char serviceId="12345"           # service id assigned by the server
+  char contextId="12345"           # context id assigned by the service
+
+  char clientId="12345"            # client id assigned by the server
+  char appName="app"
+  char userName="user"
+  
+  command {
+    char name="command name"
+
+    # this group contains the command data
+  }
+}
+
+
+5.3.2. Response
+
+5.3.2.1. Error Response
+
+Error {
+  int code="1"           # error code
+  char text="error text" # error text
+}
+
+5.3.2.2. Normal Response
+
+ServiceCommandResponse {
+  
+  command {
+    # this group contains the command response data
+  }
+}
+
+
+

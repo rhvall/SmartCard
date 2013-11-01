@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "getStringRepresentation(void const*, unsigned int, unsigned char const*, unsigned int const&amp;, unsigned char):CardBytesAnalysis.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "cmmPosition + cmmLength + sizeOffset">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FirstViewController tableView:numberOfRowsInSection:]:FirstViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "getCommandPosition(void const*, unsigned int, unsigned char const*, unsigned int const&amp;):CardBytesAnalysis.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "castData[i]">
+            </PersistentString>
+            <PersistentString
+               value = "command[j]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "changeFromStrToHex(std::string):CardBytesAnalysis.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "fullStr.at(i)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FirstViewController tableView:cellForRowAtIndexPath:]:FirstViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "getStringRepresentation(void const*, unsigned int, unsigned char const*, unsigned int const&amp;, unsigned int):CardBytesAnalysis.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "castData[cmmPosition + cmmLength + sizeOffset]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getDataRepresentation(void const*, unsigned int, unsigned char const*, unsigned int const&amp;, DataRepresentation, unsigned int):CardBytesAnalysis.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "castData[cmmPosition + cmmLength + sizeOffset + k]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getCardHolderName(void const*, unsigned char):CardBytesAnalysis.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "length + 0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

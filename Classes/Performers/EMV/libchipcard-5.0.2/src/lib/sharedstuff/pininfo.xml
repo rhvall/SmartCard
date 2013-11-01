@@ -1,0 +1,32 @@
+<typedefs>
+  <type id="uint32_t" dbtype="int" />
+  <type id="GWEN_CRYPT_PINENCODING" dbtype="int" />
+</typedefs>
+
+
+<types>
+  <type id="LC_PININFO" 
+        prefix="LC_PinInfo" 
+        class="PinInfo"
+        access="public"
+        filename="pininfo"
+        inherit="public" 
+        list="lib"
+        list2="public" >
+
+    <headers>
+      <header type="sys" >gwenhywfar/types.h</header>
+      <header type="sys" >gwenhywfar/cryptdefs.h</header>
+      <header type="sys" >chipcard/chipcard.h</header>
+    </headers>
+    
+    <elem name="name" type="char" ptr="1" />
+    <elem name="id" type="uint32_t" />
+    <elem name="encoding" type="int" />
+    <elem name="minLength" type="int" />
+    <elem name="maxLength" type="int" />
+    <elem name="allowChange" type="int" />
+    <elem name="filler" type="int" />
+    
+  </type>
+</types>

@@ -1,0 +1,27 @@
+//
+// Prefix header for all source files of the 'CardGame' target in the 'CardGame' project
+//  CardGame
+//
+//  Created by Raúl Horacio Valencia Tenorio on 19/03/12.
+//  Copyright (c) 2011 TTApps. All rights reserved.
+//
+//
+//	           (\___/)
+//             (o\ /o) 
+//            /|:.V.:|\
+//		      \\::::://
+//        -----`"" ""`-----
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#define ALog(...) NSLog(__VA_ARGS__)
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "ProjectConstants.h"
+#endif

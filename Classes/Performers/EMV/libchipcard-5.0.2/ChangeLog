@@ -1,0 +1,553 @@
+------------------------------------------------------------------
+2010-11-13 16:57:41 +0000 martin
+Added a test which dumps the first record of the bank information file.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@587 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 16:57:39 +0000 martin
+Added missing module.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@586 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 16:57:37 +0000 martin
+Added first pin description for ZKA card.
+After verification of PIN 0x03 in DF_NOTEPAD the bank information can be
+read.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@585 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 16:57:35 +0000 martin
+Fixed some commands for ZKA cards.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@584 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 16:57:33 +0000 martin
+Renamed some zkacard xml files.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@583 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 16:57:31 +0000 martin
+Added log messages after execution of APDUs.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@582 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 16:57:29 +0000 martin
+LC_Card_ReadBinary: Added a check for end of data.
+The special response 82/82 is now recognized (this flags the end of data
+which isn't in every case an error. In cases were we don't now in advance
+the data size to read the read command simply stops now at EOF).
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@581 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 16:57:27 +0000 martin
+Added new friendly name of those cyberJacks to reader description file.
+Unfortunately Reiner SCT decided to change the friendly names of their readers
+so the current comparison strings don't match anymore. As a result cyberJacks
+aren't recognized as such but as generic CCID readers. However, this isn't
+much of a problem because the commands are mostly the same.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@580 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 16:57:25 +0000 martin
+Fixed a problem with command PerformVerification_Ascii.
+Maybe we will have to work more on that one, but for now verfication of the
+PIN of a SECCOS card is possible.
+
+However, changing the PIN is not yet possible with those cards, but I will
+address that one later.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@579 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 13:33:35 +0000 martin
+Started working on SECCOS support.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@578 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-11-13 13:33:30 +0000 martin
+Added gource script.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@577 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-08-30 15:08:40 +0000 martin
+Prepared release 5.0.0.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@576 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-08-30 15:08:39 +0000 martin
+Added target for clang, fixed a problem found by clang.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@575 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-08-30 15:08:37 +0000 martin
+Removed old ChangeLogs, restricted size of new ChangeLog.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@574 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-08-25 09:58:49 +0000 martin
+Prepared release 4.99.9rc.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@573 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-08-25 09:58:47 +0000 martin
+Removed argument FILE from all dump functions.
+This is the first step in removing dependencies on the console. When
+finished we will no longer need a console on WIN32 in windows apps.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@572 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-08-06 13:40:53 +0000 martin
+Prepared release 4.99.7beta.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@571 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-08-06 13:40:51 +0000 martin
+Allow for non-interactive use.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@570 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-07-04 15:26:27 +0000 martin
+Added missing newline.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@569 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-06-17 11:12:25 +0000 martin
+Prepared release 4.99.6beta.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@568 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-06-15 14:38:56 +0000 martin
+MacOSX: Use binary-related search paths.
+Now Libchipcard5 also works as part of the AqBanking framework.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@567 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-06-15 10:20:19 +0000 martin
+Libchipcard5 now also compiles on MacOSX.
+- provide PCSC includes on MacOSX (as does libccid)
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@566 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-21 13:05:36 +0000 martin
+Prepared release 4.99.5beta.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@565 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-21 13:05:34 +0000 martin
+Improved pcsc.m4.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@564 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-06 15:14:54 +0000 martin
+Use GWEN for translations.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@563 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-06 12:12:48 +0000 martin
+Improved error message to show the packages needed for pcsc.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@562 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-05 22:12:56 +0000 martin
+Prepared release 4.99.4beta.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@561 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-05 22:12:55 +0000 martin
+Removed assertions.
+This could have crashed the application if the pcscd isn't running.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@560 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-05 12:55:02 +0000 martin
+Prepared release 4.99.3beta.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@559 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-05 12:55:00 +0000 martin
+Fixed a bug which prevented use of readers keypad.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@558 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-04 21:11:52 +0000 martin
+Define SCARD_E_NO_READERS_AVAILABLE if it not already is.
+We build the binary packages for AqFinance on a Debian4 whose pcsclite
+apparently doesn't know about SCARD_E_NO_READERS_AVAILABLE.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@557 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-04 14:25:16 +0000 martin
+Fixed a bug (was returning the same card over and over again).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@556 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-04 13:56:25 +0000 martin
+Added missing definitions for WIN32.
+Building WIN32 packages now works again.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@555 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-04 12:45:42 +0000 martin
+Libchipcard now uses the same scheme as Gwenhywfar to install headers.
+Current headers go now into $PREFIX/include/libchipcard5.
+Removed special handling under windows (needs more work, though).
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@554 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-04 12:45:33 +0000 martin
+Removed code which is no longer supported or maintained.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@553 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-04 12:45:29 +0000 martin
+Added new folder to .gitignore.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@552 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-01 10:04:40 +0000 martin
+Prepared release 4.99.1beta.
+Increases required minimim version of gwen.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@551 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-01 10:04:38 +0000 martin
+Added entry to .gitignore.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@550 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-01 10:04:36 +0000 martin
+Fixed a bug.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@549 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-05-01 10:04:34 +0000 martin
+No longer load configuration file (it is empty anyway).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@548 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-29 23:41:47 +0000 martin
+Adapted to latest changes in Gwenhywfar.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@547 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-29 23:41:44 +0000 martin
+Increased revision.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@546 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-16 06:07:04 +0000 martin
+Removed ressource manager completely.
+We now use pcsc as ressource manager. There is no need for libchipcard's
+own ressource manager anymore since PC/SC Part 10 and its implementation
+in most modern IFD drivers, so secure PIN input and modification is now
+possible via standard APDUs. Also latest beta versions of pcsclite include
+a pcscd daemon which now only connects the reader as long as a client needs
+a reader. This obsoletes libchipcard's own ressource manager.
+This allows me to concentrate on card implementations without having to
+maintain the ressource manager.
+
+The CTAPI-wrapper around libchipcard has also been removed since there
+already are such wrappers for pcsc directly.
+
+This makes for a lean but mean version of libchipcard.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@545 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-15 23:50:12 +0000 martin
+Fixed a bug in driver descriptions.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@544 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-15 23:45:13 +0000 martin
+Added a test for EMV cards.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@543 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-15 23:45:11 +0000 martin
+Fixed a problem with ddv cards.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@542 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-15 23:45:09 +0000 martin
+Added an ATR for newer DDV1 cards.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@541 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-15 23:45:07 +0000 martin
+Improved support for PC/SC on POSIX systems.
+Future versions of Libchipcard might use pcsclite as default ressource
+manager.
+
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@540 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-04-04 17:08:33 +0000 martin
+Added an init script for fedora provided by "Matthias" (libchipcard ticket 80).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@539 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-02-04 22:36:55 +0000 martin
+Added command "psvd" to kvkcard and implemented the corresponding functions.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@538 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-02-04 22:36:52 +0000 martin
+Show the ATR in reader log.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@537 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-01-31 13:47:50 +0000 martin
+Decrease verbosity.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@536 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-01-31 13:47:48 +0000 martin
+Adjusted some copyright messages.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@535 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2010-01-31 13:47:45 +0000 martin
+Fixed a bug in some driver description files.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@534 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-12-26 16:34:36 +0000 martin
+Releases 4.2.9.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@533 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-12-03 21:40:06 +0000 martin
+Fixed deinit of HAL scanner (patch by Micha Lenk).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@532 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-12-02 20:48:17 +0000 martin
+Decreased verbosity of chipcard daemon (patch by Micha Lenk).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@531 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-12-02 20:45:29 +0000 martin
+Applied a patch provided by Micha Lenk (now correctly detects HAL daemon).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@530 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-09-18 15:44:17 +0000 martin
+Removed unused code.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@529 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-09-18 15:40:26 +0000 martin
+Removed support for SysFS. We no stick with libhal. - require Gwenhywfar 3.9.0 or newer - removed support for libsysfs - exclusively use HAL to scan for PCMCIA, USB and USBTty devices - make --enable-hal the default (overwrite with --disable-hal) - add member "usbClass" to LC_DEVICE and LCCO_READER - uses this new member to distinguish usb.interface.class (this makes the   cherry keyboard with incorporated card reader actually work as it now   only registers with its card reader interface) - removed obsolete source files (mainly unused scanners) - removed some now obsolete config settings (disablePcmciaScan etc.)
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@528 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-06-26 20:48:46 +0000 martin
+Added INSTALL to .gitignore.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@527 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-06-26 20:48:40 +0000 martin
+Added name of latest SCM driver.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@526 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-05-16 21:20:05 +0000 martin
+Added some more missing files.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@525 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-05-16 21:15:42 +0000 martin
+Added missing file.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@524 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-05-16 20:13:14 +0000 christian
+Add svn:ignore for INSTALL.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@523 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-05-16 20:10:07 +0000 christian
+Remove INSTALL because it is being created by automake.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@522 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-05-09 16:40:45 +0000 martin
+Released 4.2.8. - added and adapted a patch by J.Breitner to support new GemPC readers - added a patch by Micha Lenk to fix the error handling for device   scanners failing to initialize - added driver description for Omnikey CM 4040
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@521 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-04-07 20:11:28 +0000 martin
+Prepared release 4.2.7. - renamed internal type "HALSCANNER" to "LC_HALSCANNER" - removed libchipcardd.so (it was only used internally)
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@520 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-04-07 20:11:26 +0000 martin
+Prepared release 4.2.6.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@519 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-04-06 17:00:36 +0000 martin
+Fixed a few memory leaks in HAL scanner.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@518 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-03-30 22:53:55 +0000 martin
+Released version 4.2.5.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@517 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-03-30 19:40:47 +0000 martin
+Fixed a problem with newer libccid. Newer releases of libccid no longer report the driver version in the ProductString message, so in this case we assume that libccid is in fact newer than 1.1.0. This fixes the problem of Libchipcard no longer being able to make a reader verify the pin via keypad.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@516 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-03-30 19:40:05 +0000 martin
+Added missing AC_PROG_CXX.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@515 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-03-30 19:39:47 +0000 martin
+Added some entries to .gitignore.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@514 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-03-19 20:12:28 +0000 martin
+Fixes some control logic for PCMCIA devices and adds some more details to new chipcard devices. Patch provided by Micha Lenk.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@513 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-03-19 20:08:15 +0000 martin
+Add usage and available commands to the output of "chipcard-tool -h". Patch provided by Micha Lenk.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@512 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-03-19 20:08:13 +0000 martin
+Added reader description for GemPC Express.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@511 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-01-21 23:27:48 +0000 martin
+Prepared release 4.2.4.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@510 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-01-21 23:21:03 +0000 martin
+Added description for Lonovo reader.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@509 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-01-21 22:39:04 +0000 martin
+Fixed a bug in CTAPI-wrapper reported by Andreas Steinmetz.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@508 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-01-20 22:31:19 +0000 martin
+REmoved a superfluous include directive.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@507 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-01-20 22:31:16 +0000 martin
+Fixed problem with libHAL ("info.bus" is no longer supported by libhal).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@506 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-01-20 22:31:14 +0000 martin
+Added missing files.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@505 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-01-20 22:31:12 +0000 martin
+Added debug message for the case when HAL returns an empty device list.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@504 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2009-01-20 22:31:10 +0000 martin
+Added entries for CCID devices (provided by Dietrich Feist).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@503 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-11-08 14:51:02 +0000 martin
+Released 4.2.3. - decreased severity of question "Insert card" to allow the CryptToken plugins   to be used in non-interactive mode - no longer use deprecated functions internally
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@502 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-22 20:02:15 +0000 martin
+Removed debug files.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@501 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-22 19:58:43 +0000 martin
+Added support for eGK CDM 3.0.0.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@500 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-22 19:58:38 +0000 martin
+Fixed a bug in usbttyscanner.c when not using HAL.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@499 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-19 13:20:17 +0000 martin
+Fixed "make dist".
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@498 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-19 13:20:12 +0000 martin
+Distribute ChangeLog.old.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@497 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-19 13:17:06 +0000 martin
+Added support for PCMCIA bus using libHAL, prepared release 4.2.2 - added support for libccidtwin driver (comes with libccid) - fully create ChangeLog from git-log - renamed LC_Device_BusType_UsbTty to LC_Device_BusType_Tty and also use it   for PCMCIA-TTY devices
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@496 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-18 12:33:24 +0000 martin
+Added commands to tool kvkcard (rdvd and rdpd, internal commands to read data from an EGK).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@495 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-17 20:59:49 +0000 martin
+Added Kobil Kaan Tribank (supported by free CCID driver).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@494 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-12 20:28:48 +0000 martin
+Incremented version.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@493 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-12 20:23:04 +0000 martin
+Fixed EGK code to work with newer "Basis-Rollout" cards.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@492 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-11 10:17:23 +0000 martin
+Fixed some bugs, prepared release 4.2.1.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@491 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-05 15:49:32 +0000 martin
+Added a section about using signals to trigger hardware scans to README. Increase the waiting time used in GWEN_Io_Manager_Wait (thus reducing the number of wakeups for the process).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@490 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-05 14:49:45 +0000 martin
+Fixed a bug (command cache needs to be purged when changing the card type).
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@489 bfc04c16-8f10-0410-8200-ddfbc4d55d47
+
+------------------------------------------------------------------
+2008-10-04 20:13:22 +0000 martin
+Added startup message about LibHAL support to chipcardd.
+git-svn-id: https://devel.aqbanking.de/svn/libchipcard/trunk@488 bfc04c16-8f10-0410-8200-ddfbc4d55d47

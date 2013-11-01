@@ -1,0 +1,83 @@
+
+
+In "private" or "secure" mode the chipcard2 daemon uses SSL secured
+connections. For this to work you need to do some setup.
+
+You can let the chipcard daemon do this for you (easiest way, since the
+chipcard daemon knows where to store which files) or you can do it manually.
+
+
+
+1. Let Chipcardd Do It
+======================
+
+Just issue the following command as root:
+
+#>chipcardd2 init
+
+This creates all necessary files for "private" or "secure" IPC mode.
+
+
+
+2. Do It Manually
+=================
+
+1) You need a DH-File. You can build it with
+   
+   #>openssl dhparam -2 -outform PEM -out "FILENAME" 1024
+
+2) You also need a certificate. The certificate files used by the chipcard2
+   daemon must contain the certificate and the private key.
+   You can first create the private key, create the certificate and then
+   sign the certificate using the created private key.
+   
+The following describes how to create a self-signed certificate to be used
+by the chipcard2 daemon as well as by a client. 
+Please replace "${NAME}" in this description by a name of your choice.
+
+ a) generate a new private key
+    
+    #>openssl genrsa -des3 -out ${NAME}.key 1024
+
+ b)
+    The previous command asks for a password which you can not omit in that
+    step.
+    Therefore we need to transform the key to not use a password (otherwise
+    the server would need to ask for a PIN everytime a connection is 
+    opened).
+    
+    #>openssl rsa -in ${NAME}.key -out ${NAME}.pem
+
+ c)
+    Now we can create a certificate which we will sign later.
+    This asks you some questions. The most important one is that
+    concerning a so-called "common name". Please use something like
+    "USERNAME@HOSTNAME", this username can be used by the chipcard2 daemon
+    to recognize users with admin access to the daemon.
+    
+    #>openssl req -new -key ${NAME}.pem -out ${NAME}.csr
+
+ d)
+    We now need to sign the certificate. Normally this would be done by
+    a signature authority. However, we will sign the certificate with our
+    own newly created key. The chipcard2 daemon will later accept this one.
+    
+    #>openssl x509 -req -in ${NAME}.csr -signkey ${NAME}.pem -out ${NAME}.crt
+
+ e)
+    We have to create the final file now by concatenating the new keyfile and
+    the new certificate:
+    
+    #>cat ${NAME}.crt ${NAME}.pem > ${NAME}.cert
+
+The resulting file ${NAME}.cert can now be used for secure SSL connections.
+You must name this file to "certfile" in the "server" section of the 
+configuration file.
+
+
+WARNING:
+The file created MUST only be accessable by the chipcard2 daemon !!
+It MUST NOT be accessable by any user !!
+
+
+

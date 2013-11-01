@@ -1,0 +1,60 @@
+
+- cardfs: implement function ServiceCardFS_Command()
+
+
+
+Erstellen des Server Certs und des CA Certs: 
+--------------------------------------------
+
+#!/bin/bash 
+ 
+mkdir certs 
+cd certs 
+echo "CA Cert erstellen..." 
+openssl genrsa -aes256 -out ca_key_vpn.pem 2048 
+openssl req -new -x509 -days 3650 -key ca_key_vpn.pem -out ca_cert_vpn.pem -set_serial 1 
+chmod 700 ../certs 
+touch serial 
+echo "01" > serial 
+ 
+echo "" 
+echo "Server Cert erstellen..." 
+echo "Wichtig: Common Name einzigartig halten und merken - wird sp?eter im VPN Script gebraucht" 
+echo "" 
+openssl req -new -newkey rsa:2048 -out server_csr_vpn.pem -nodes -keyout server_key_vpn.pem -days 3650 
+openssl x509 -req -in server_csr_vpn.pem -out server_cert_vpn.pem -CA ca_cert_vpn.pem -CAkey ca_key_vpn.pem -CAserial serial -days 3650 
+rm server_csr_vpn.pem 
+ 
+echo "" 
+echo "Zufallszahlen erstellen..." 
+openssl dhparam -out dh2048.pem 2048 
+echo "" 
+ 
+echo "Client Certs mit folgendem Commando vorbereiten:" 
+echo "./clientcerts <clientname>" 
+ 
+
+
+Erstellen der Clientcerts
+-------------------------
+ 
+ 
+Benutzung: ./createclients <clientname> 
+
+
+
+#!/bin/bash 
+ 
+cd certs 
+echo "Client Cervorbvorbereiten..." 
+openssl req -new -newkey rsa:2048 -out $1_csr_vpn.pem -nodes -keyout $1_key_vpn.pem -days 3650 
+ 
+echo "" 
+echo "Client Certs erstellen..." 
+openssl x509 -req -in $1_csr_vpn.pem -out $1_cert_vpn.pem -CA ca_cert_vpn.pem -CAkey ca_key_vpn.pem -CAserial serial -days 3650 
+echo "" 
+echo "CSR Cert loeschen..." 
+rm $1_csr_vpn.pem 
+echo "Clientcert $1_cert_vpn.pem und Clientkey $1_key_vpn.pem erstellt..." 
+cd .. 
+ 

@@ -1,0 +1,93 @@
+
+<!-- 
+  This is a file to be processed by Gwenhywfar's tool typemaker 
+  It creates the necessary files to implement the types listed herein.
+  I you make any changes to this file do a "make types" in this folder.
+-->
+
+<typedefs>
+  <type id="GWEN_TIME" >
+    <functions>
+      <function type="todb" name="GWEN_Time_toDb" />
+      <function type="fromdb" name="GWEN_Time_fromDb" />
+      <function type="dup" name="GWEN_Time_dup" />
+      <function type="free" name="GWEN_Time_free" />
+    </functions>
+  </type>
+  
+  <type id="GWEN_TYPE_UINT32" dbtype="int" />
+  
+</typedefs>
+
+
+<types>
+
+
+  <type id="LC_GELDKARTE_BLOG" 
+        filename="geldkarte_blog"
+        prefix="LC_GeldKarte_BLog" 
+        class="GeldKarte_BLog"
+        access="public"
+        list2="public">
+    <headers>
+      <header type="sys" >gwenhywfar/types.h</header>
+      <header type="sys" >gwenhywfar/gwentime.h</header>
+      <header type="sys" >chipcard/chipcard.h</header>
+    </headers>
+    
+    <elem name="status" type="int" />
+    <elem name="bSeq" type="int" />
+    <elem name="lSeq" type="int" />
+    <elem name="value" type="int" />
+    <elem name="merchantId" type="char" ptr="1" />
+    <elem name="hSeq" type="int" />
+    <elem name="sSeq" type="int" />
+    <elem name="loaded" type="int" />
+    <elem name="time" type="GWEN_TIME" ptr="1" />
+    <elem name="keyId" type="int" />
+  </type>
+
+
+  <type id="LC_GELDKARTE_LLOG" 
+        filename="geldkarte_llog"
+        prefix="LC_GeldKarte_LLog" 
+        class="GeldKarte_LLog"
+        access="public"
+        list2="public">
+    <headers>
+      <header type="sys" >gwenhywfar/types.h</header>
+      <header type="sys" >gwenhywfar/gwentime.h</header>
+      <header type="sys" >chipcard/chipcard.h</header>
+    </headers>
+    
+    <elem name="status" type="int" />
+    <elem name="bSeq" type="int" />
+    <elem name="lSeq" type="int" />
+    <elem name="value" type="int" />
+    <elem name="centerId" type="char" ptr="1" />
+    <elem name="terminalId" type="char" ptr="1" />
+    <elem name="traceId" type="char" ptr="1" />
+    <elem name="loaded" type="int" />
+    <elem name="time" type="GWEN_TIME" ptr="1" />
+  </type>
+
+
+  <type id="LC_GELDKARTE_VALUES" 
+        filename="geldkarte_values"
+        prefix="LC_GeldKarte_Values" 
+        class="GeldKarte_Values"
+        access="public"
+        list2="public">
+    <headers>
+      <header type="sys" >gwenhywfar/types.h</header>
+      <header type="sys" >gwenhywfar/gwentime.h</header>
+      <header type="sys" >chipcard/chipcard.h</header>
+    </headers>
+    
+    <elem name="loaded" type="int" />
+    <elem name="maxLoad" type="int" />
+    <elem name="maxXfer" type="int" />
+  </type>
+  
+  
+</types>

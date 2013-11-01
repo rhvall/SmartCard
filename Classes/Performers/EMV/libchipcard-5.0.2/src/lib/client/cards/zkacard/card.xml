@@ -1,0 +1,138 @@
+
+<!--
+  These are the known algos for ManageSE
+  Template ! Algo !   Hash     ! Padding
+  =====================================================
+    0xb6   ! 0x11 ! SHA-1      ! ISO 9796/2 with random 
+           !      !            ! (->SigG v1.0)
+           ! 0x12 ! SHA-1      ! PKCS#1 Block Type 01
+           ! 0x21 ! RIPEMD-160 ! ISO 9796/2 with random 
+           !      !            ! (->SigG v1.0)
+           ! 0x22 ! RIPEMD-160 ! PKCS#1 Block Type 01
+           ! 0x25 ! RIPEMD-160 ! ISO9796/1 incl. app A4 (->HBCI)
+           ! 0x26 ! RIPEMD-160 ! '00 ... 00 | Hash'
+           ! 0x32 ! MD-5       ! PKCS#1 Block Type 01
+           !  -   !     -      ! ISO9796/1 without app A4
+    0xb8   ! 0x02 !     -      ! PKCS#1 Block Type 02
+           ! 0x03 !     -      ! '00 ... 00 | Plaintext'
+           !  -   !     -      ! '00 ... 00 | Plaintext'
+-->
+
+
+
+<cards>
+  <card name="ZkaCard" extends="ProcessorCard" type="processor" >
+    <cardinfo>
+      <name>ZkaCard</name>
+      <descr>
+        ZKA card based on SECCOS
+      </descr>
+      <atrs>
+        <atr>
+          3B B7 94 00 81 31 fe 65 53 50 4b 32 33 90 00 d1
+        </atr>
+      </atrs>
+    </cardinfo>
+    
+    <commands>
+        <!-- Select DF by 16-bit-id -->
+      <command name="SelectDFS" >
+        <send>
+                <APDU lr="0" >
+                <ELEM type="dword">0x00a4000c</ELEM>
+                </APDU>
+                <DATA>
+                    <ELEM name="fileId" type="word" />
+                </DATA>
+                </send>
+                <results>
+            <result sw1="0x6a" sw2="0x82" type="error">File not found</result>
+                </results>
+        </command>
+
+        <!-- Select DF by application-id -->
+      <command name="SelectDFL" >
+        <send>
+                <APDU lr="-1" >
+                <ELEM type="dword">0x00a4040c</ELEM>
+                </APDU>
+                <DATA>
+                    <ELEM name="fileId" type="bytes" />
+                </DATA>
+                </send>
+                <results>
+            <result sw1="0x6a" sw2="0x82" type="error">File not found</result>
+                </results>
+        </command>
+
+      <!-- Select EF by id -->
+      <command name="SelectEFS" >
+        <send>
+                <APDU lr="-1" >
+                <ELEM type="dword">0x00a4020c</ELEM>
+                </APDU>
+                <DATA>
+                    <ELEM name="fileId" type="word" />
+                </DATA>
+                </send>
+                <results>
+            <result sw1="0x6a" sw2="0x82" type="error">File not found</result>
+                </results>
+        </command>
+
+      <!-- Select Master File -->
+      <command name="SelectMF" >
+        <send>
+                <APDU lr="-1" >
+                <ELEM type="dword">0x00a4000c</ELEM>
+                </APDU>
+                <DATA>
+                    <ELEM type="word">0x3f00</ELEM>
+                </DATA>
+                </send>
+                <results>
+            <result sw1="0x6a" sw2="0x82" type="error">File not found</result>
+                </results>
+        </command>
+
+
+    </commands>
+
+    
+    <!-- generic command responses -->
+    <results>
+      <result sw1="0x69" sw2="0x82" type="error" >
+        Security status not satisfied.
+      </result>
+      <result sw1="0x69" sw2="0x85" type="error" >
+        Condition of use not satisfied.
+      </result>
+      <result sw1="0x6a" sw2="0x80" type="error" >
+        Wrong parameter in data field.
+      </result>
+      <result sw1="0x6a" sw2="0x81" type="error" >
+        Function not supported (wrong parameters P1/P2).
+      </result>
+      <result sw1="0x6a" sw2="0x88" type="error" >
+        Referenced data not found.
+      </result>
+      <result sw1="0x6f" sw2="0x01" type="error" >
+        Public key not complete.
+      </result>
+      <result sw1="0x6f" sw2="0x03" type="error" >
+        Invalid command sequence.
+      </result>
+      <result sw1="0x6f" sw2="0x05" type="error" >
+        No security environment.
+      </result>
+      <result sw1="0x6f" sw2="0x08" type="error" >
+        Signature could not be verified with public key.
+      </result>
+      <result sw1="0x6f" sw2="0x0a" type="error" >
+        Key format list does not match key length.
+      </result>
+    </results>
+
+  </card>
+</cards>
+
